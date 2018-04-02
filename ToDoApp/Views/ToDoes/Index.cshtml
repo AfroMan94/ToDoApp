@@ -1,0 +1,87 @@
+﻿@model ToDoApp.Models.ToDo
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>My ToDo List</h2>
+
+<div id="progressBar">
+	<div class="progress">
+		<div class="progress-bar" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100"></div>
+	</div>
+<div id="tableDiv"></div>
+
+<div id="toDoForm">
+	@using (Ajax.BeginForm("AJAXCreate", "ToDoes",
+				new AjaxOptions
+				{
+					InsertionMode = InsertionMode.Replace,
+					HttpMethod = "POST",
+					UpdateTargetId = "tableDiv",
+					OnSuccess = "ClearInputField"
+				}
+
+			))
+	{
+		<div class="form-group">
+			@Html.AntiForgeryToken()
+
+			@Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+			@Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+		</div>
+	}
+</div>
+
+@section Scripts {
+
+	<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+	<script src="~/Scripts/Custom_Scripts/BuildTable.js"></script>
+	<script src="~/Scripts/Custom_Scripts/GenerateProgressBar.js"></script>
+	<script>
+		generate();
+	</script>
+	@Scripts.Render("~/bundles/jqueryval ") 
+
+	<script type="text/javascript">
+
+		function ClearInputField() {
+			$("#Description").val("");
+
+
+			generate();
+		
+			//$.ajax({
+			//	url: '/ToDoes/getCompleted',
+			//	success: function (result) {
+
+			//		if (result == 100) {
+			//			$('#progressBar .progress div').toggleClass('progress-bar progress-bar-success');
+			//		}
+
+			//		if (result < 100) {
+			//			$('#progressBar .progress div').addClass('progress-bar').removeClass('progress-bar-success');
+			//		}
+
+
+			//		$('.progress-bar').each(function () {
+			//			var bar_value = result + '%';
+			//			$(this).text(bar_value);
+			//			$(this).animate({ width: bar_value }, { duration: 50 });
+			//		});
+
+			//		$('.progress-bar-success').each(function () {
+			//			var bar_value = result + '%';
+			//			$(this).text(bar_value);
+			//			$(this).animate({ width: bar_value }, { duration: 50 });
+			//		});
+			//	}
+
+			//});
+		}
+
+	</script>
+
+
+}
+

@@ -7,6 +7,7 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+	padding-top: 10px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -21,4 +22,26 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+
+#tableDiv {
+	padding-top: 20px;
+
+}
+
+/*styling for to do */
+.completedToDo {
+	text-decoration: line-through;
+	font-style: italic;
+}
+
+.progress-bar-success {
+	text-align: center;
+	color: white;
+}
+
+.progress-bar {
+	-webkit-transition: width 2.5s ease;
+	transition: width 2.5s ease;
 }
